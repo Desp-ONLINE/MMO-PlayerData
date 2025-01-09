@@ -1,0 +1,6 @@
+name: MMOPlayerData
+version: '1.0.0'
+main: com.binggre.mmoplayerdata.MMOPlayerDataPlugin
+api-version: '1.20'
+authors: [ binggre ]
+depend: ['BinggreAPI', 'MongoLibraryPlugin', 'VelocitySocketClient']
