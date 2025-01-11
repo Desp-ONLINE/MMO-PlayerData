@@ -1,6 +1,9 @@
 name: MMOPlayerData
-version: '1.0.0'
+version: '${version}'
 main: com.binggre.mmoplayerdata.MMOPlayerDataPlugin
 api-version: '1.20'
 authors: [ binggre ]
 depend: ['BinggreAPI', 'MongoLibraryPlugin', 'VelocitySocketClient']
+commands:
+  mmoplayerdata:
+    permission: mmoplayerdata.admin
