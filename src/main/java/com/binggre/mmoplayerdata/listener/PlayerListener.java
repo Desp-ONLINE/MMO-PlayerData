@@ -9,6 +9,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import java.util.UUID;
+
 public class PlayerListener implements Listener {
 
     private final PlayerRepository repository = MMOPlayerDataPlugin.getInstance().getPlayerRepository();
@@ -24,10 +26,10 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
-        MMOPlayerData mmoPlayerData = repository.get(event.getPlayer().getUniqueId());
+        UUID uniqueId = event.getPlayer().getUniqueId();
+        MMOPlayerData mmoPlayerData = repository.remove(uniqueId);
         if (mmoPlayerData != null) {
             mmoPlayerData.updateLastQuitDate();
-            repository.putIn(mmoPlayerData);
             repository.saveAsync(mmoPlayerData);
         }
     }
