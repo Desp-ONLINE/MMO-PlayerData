@@ -5,6 +5,7 @@ import com.binggre.mmoplayerdata.objects.MMOPlayerData;
 import com.binggre.mongolibraryplugin.base.MongoCachedRepository;
 import com.binggre.velocitysocketclient.VelocityClient;
 import org.bson.Document;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.Nullable;
@@ -99,9 +100,9 @@ public class PlayerRepository extends MongoCachedRepository<UUID, MMOPlayerData>
     }
 
     public void init() {
-        List<MMOPlayerData> all = findAll();
-        for (MMOPlayerData mmoPlayerData : all) {
-            putIn(mmoPlayerData);
+        for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
+            MMOPlayerData init = init(onlinePlayer);
+            putIn(init);
         }
     }
 

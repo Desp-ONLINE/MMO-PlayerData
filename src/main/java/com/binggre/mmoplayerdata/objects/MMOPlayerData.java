@@ -1,7 +1,10 @@
 package com.binggre.mmoplayerdata.objects;
 
+import com.binggre.mmoplayerdata.config.Config;
 import com.binggre.mongolibraryplugin.base.MongoData;
 import lombok.Getter;
+import lombok.Setter;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.time.LocalDateTime;
@@ -12,16 +15,19 @@ public class MMOPlayerData implements MongoData<UUID> {
 
     private final UUID id;
     private String nickname;
-    private final String serverName;
+    private String serverName;
     private LocalDateTime lastJoinDate;
     private LocalDateTime lastQuitDate;
 
     public MMOPlayerData(Player player) {
         this.id = player.getUniqueId();
         this.nickname = player.getName();
-        this.serverName = player.getServer().getName();
         updateLastJoinDate();
         updateLastQuitDate();
+    }
+
+    public void updateServerName(int port) {
+        this.serverName = Config.getInstance().getServerName(Bukkit.getServer().getPort());
     }
 
     public void updateNickname(Player player) {

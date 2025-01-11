@@ -3,6 +3,7 @@ package com.binggre.mmoplayerdata.listener;
 import com.binggre.mmoplayerdata.MMOPlayerDataPlugin;
 import com.binggre.mmoplayerdata.objects.MMOPlayerData;
 import com.binggre.mmoplayerdata.repository.PlayerRepository;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -21,6 +22,7 @@ public class PlayerListener implements Listener {
         MMOPlayerData init = repository.init(player);
         init.updateLastJoinDate();
         init.updateNickname(player);
+        init.updateServerName(Bukkit.getPort());
         repository.putIn(init);
     }
 
